@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/05 13:09:14 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:10:42 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,17 @@ void	Bureaucrat::lowerGrade(void)
 		this->_grade++;
 	else
 		throw (Bureaucrat::GradeTooLowException());
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signed " << form.getName() << "." << std::endl;
+	}
+	catch (Form::GradeTooLowException)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because his grade is too low..." << std::endl;
+	}
 }

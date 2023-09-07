@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/05 13:35:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:09:48 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+
+# include "../Form.Class/Form.hpp"
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[30m"
@@ -24,6 +26,8 @@
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
+
+class Form;
 
 class Bureaucrat {
 
@@ -58,6 +62,8 @@ public:
 	// Body
 	void			upperGrade(void);
 	void			lowerGrade(void);
+	void			signForm(Form &form);
+	void			executeForm(Form &form);
 
 };
 

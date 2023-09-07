@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/05 13:35:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:32:49 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
 # include <iostream>
+# include <fstream>
+# include <cstdlib>
+# include <time.h>
+
+# include "../Form.Class/Form.hpp"
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[30m"
@@ -25,42 +30,28 @@
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
 
-class Bureaucrat {
+class RobotomyRequestForm: public Form {
 
 private:
 
-	std::string	_name;
-	int			_grade;
+	std::string		_target;
 
 public:
 
 	// Init
-	Bureaucrat(std::string type, int grade);
-	Bureaucrat(const Bureaucrat &obj);
-	~Bureaucrat(void);
-	Bureaucrat &operator=(const Bureaucrat &obj);
-
-	// Exceptions
-	class	GradeTooHighException: public std::exception {
-		public:
-			virtual char const	*what(void) const throw();
-	};
-	
-	class	GradeTooLowException: public std::exception {
-		public:
-			virtual char const	*what(void) const throw();
-	};
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(const RobotomyRequestForm &obj);
+	~RobotomyRequestForm(void);
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &obj);
 
 	// Getters
-	std::string		getName(void) const;
-	int				getGrade(void) const;
+	std::string	getTarget(void) const;
 
 	// Body
-	void			upperGrade(void);
-	void			lowerGrade(void);
-
+	void		beExecuted(Bureaucrat const & executor) const;
+	
 };
 
-std::ostream &operator<<(std::ostream &out, const Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &out, const RobotomyRequestForm &obj);
 
 #endif
