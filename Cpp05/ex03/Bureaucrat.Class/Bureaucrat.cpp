@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/08 13:30:49 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 13:36:51 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ Bureaucrat::~Bureaucrat(void)
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &obj)
 {
-	this->_name = obj._name;
 	this->_grade = obj._grade;
 	return (*this);
 }
