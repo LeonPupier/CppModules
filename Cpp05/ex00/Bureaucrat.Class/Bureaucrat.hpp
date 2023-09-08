@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/08 11:54:30 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 13:26:10 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ class Bureaucrat {
 
 private:
 
-	std::string	_name;
-	int			_grade;
+	std::string const	_name;
+	int					_grade;
 
 public:
 

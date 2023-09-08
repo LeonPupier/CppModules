@@ -6,24 +6,22 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/08 12:29:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 13:30:49 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 // Init
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat(): _name("NoName")
 {
 	std::cout << GREEN << "[LOG] " << RESET << "Bureaucrat class has been created" << std::endl;
-	this->_name = "NoName";
 	this->_grade = 150;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
 	std::cout << GREEN << "[LOG] " << RESET << "Bureaucrat class has been created" << std::endl;
-	this->_name = name;
 	if (grade < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else if (grade > 150)
