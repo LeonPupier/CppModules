@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 15:20:31 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:31:18 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ private:
 public:
 
 	// Init
+	Form();
 	Form(std::string type, int grade_sign, int grade_exec);
 	Form(const Form &obj);
 	virtual ~Form(void);

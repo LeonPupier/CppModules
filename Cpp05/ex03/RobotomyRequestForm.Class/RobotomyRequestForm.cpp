@@ -6,13 +6,19 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:42:32 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:32:39 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 
 // Init
+RobotomyRequestForm::RobotomyRequestForm(): Form("RobotomyRequestForm", 72, 45)
+{
+	std::cout << GREEN << "[LOG] " << RESET << "RobotomyRequestForm class has been created" << std::endl;
+	this->_target = "NoName";
+}
+
 RobotomyRequestForm::RobotomyRequestForm(std::string target): Form("RobotomyRequestForm", 72, 45)
 {
 	std::cout << GREEN << "[LOG] " << RESET << "RobotomyRequestForm class has been created" << std::endl;

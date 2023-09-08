@@ -6,13 +6,19 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:44:53 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:33:12 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
 
 // Init
+ShrubberyCreationForm::ShrubberyCreationForm(): Form("ShrubberyCreationForm", 145, 137)
+{
+	std::cout << GREEN << "[LOG] " << RESET << "ShrubberyCreationForm class has been created" << std::endl;
+	this->_target = "NoName";
+}
+
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target): Form("ShrubberyCreationForm", 145, 137)
 {
 	std::cout << GREEN << "[LOG] " << RESET << "ShrubberyCreationForm class has been created" << std::endl;

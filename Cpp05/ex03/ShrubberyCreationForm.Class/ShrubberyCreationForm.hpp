@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 14:54:33 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:33:19 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ private:
 public:
 
 	// Init
+	ShrubberyCreationForm();
 	ShrubberyCreationForm(std::string target);
 	ShrubberyCreationForm(const ShrubberyCreationForm &obj);
 	~ShrubberyCreationForm(void);

@@ -6,13 +6,20 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:10:42 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 11:55:28 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 // Init
+Bureaucrat::Bureaucrat()
+{
+	std::cout << GREEN << "[LOG] " << RESET << "Bureaucrat class has been created" << std::endl;
+	this->_name = "NoName";
+	this->_grade = 150;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade)
 {
 	std::cout << GREEN << "[LOG] " << RESET << "Bureaucrat class has been created" << std::endl;

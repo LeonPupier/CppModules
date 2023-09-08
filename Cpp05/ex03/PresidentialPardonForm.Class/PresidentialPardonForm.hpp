@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:40:05 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:32:09 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ private:
 public:
 
 	// Init
+	PresidentialPardonForm();
 	PresidentialPardonForm(std::string target);
 	PresidentialPardonForm(const PresidentialPardonForm &obj);
 	~PresidentialPardonForm(void);

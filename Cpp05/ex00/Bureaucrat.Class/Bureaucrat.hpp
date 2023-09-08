@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/05 13:35:40 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 11:54:30 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ private:
 public:
 
 	// Init
+	Bureaucrat();
 	Bureaucrat(std::string type, int grade);
 	Bureaucrat(const Bureaucrat &obj);
 	~Bureaucrat(void);

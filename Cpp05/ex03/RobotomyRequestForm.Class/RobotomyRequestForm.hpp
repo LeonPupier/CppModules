@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:32:49 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:32:44 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ private:
 public:
 
 	// Init
+	RobotomyRequestForm();
 	RobotomyRequestForm(std::string target);
 	RobotomyRequestForm(const RobotomyRequestForm &obj);
 	~RobotomyRequestForm(void);

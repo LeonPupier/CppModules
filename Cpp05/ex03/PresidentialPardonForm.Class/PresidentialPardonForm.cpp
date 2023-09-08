@@ -6,13 +6,19 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/07 16:44:21 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:32:02 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
 // Init
+PresidentialPardonForm::PresidentialPardonForm(): Form("PresidentialPardonForm", 25, 5)
+{
+	std::cout << GREEN << "[LOG] " << RESET << "PresidentialPardonForm class has been created" << std::endl;
+	this->_target = "NoName";
+}
+
 PresidentialPardonForm::PresidentialPardonForm(std::string target): Form("PresidentialPardonForm", 25, 5)
 {
 	std::cout << GREEN << "[LOG] " << RESET << "PresidentialPardonForm class has been created" << std::endl;
