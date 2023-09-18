@@ -41,20 +41,12 @@ class ScalarConverter {
 
 private:
 
-	// Variables
-	std::string	_value;
-	int			_type;
-	char		_value_c;
-	int			_value_i;
-	float		_value_f;
-	double		_value_d;
-
 	// Body
-	void		_byDefault() const;
-	bool		_isChar();
-	bool		_isInt();
-	bool		_isFloat();
-	bool		_isDouble();
+	static void		byDefault(std::string value);
+	static int		isChar(int type, std::string value);
+	static int		isInt(int type, std::string value);
+	static int		isFloat(int type, std::string value);
+	static int		isDouble(int type, std::string value);
 
 public:
 
@@ -66,7 +58,7 @@ public:
 	ScalarConverter &operator=(const ScalarConverter &obj);
 
 	// Body
-	void	convert(std::string value);
+	static void		convert(std::string value);
 };
 
 #endif
