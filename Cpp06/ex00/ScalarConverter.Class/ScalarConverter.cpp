@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/18 18:19:26 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/18 19:06:54 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void	ScalarConverter::convert(std::string value)
 	float		value_f;
 	double		value_d;
 	int			type = INVALID;
+	char		*pointer;
 
 	std::string			overflow;
 	std::ostringstream	convert;
@@ -176,22 +177,36 @@ void	ScalarConverter::convert(std::string value)
 		case INT:
 			value_i	= atoi(value.c_str());
 			convert << value_i;
+			overflow = convert.str();
+			if (overflow != value)
+			{
+				std::cout << "[ERROR] The 'integer' type is impossible to convert (Overflow or -0)." << std::endl;
+				return ;
+			}
 			value_c	= static_cast<char>(value_i);
 			value_d	= static_cast<double>(value_i);
 			value_f	= static_cast<float>(value_i);
 			break;
 
 		case FLOAT:
-			value_f	= atof(value.c_str());
-			convert << std::fixed << std::setprecision(1) << value_f;
+			value_f	= std::strtof(value.c_str(), &pointer);
+			if (pointer == value)
+			{
+				std::cout << "[ERROR] The 'float' type input is impossible to convert (Overflow)." << std::endl;
+				return ;
+			}
 			value_i	= static_cast<int>(value_f);
 			value_c	= static_cast<char>(value_f);
 			value_d	= static_cast<double>(value_f);
 			break;
 
 		case DOUBLE:
-			value_d	= std::strtod(value.c_str(), NULL);
-			convert << std::fixed << std::setprecision(1) << value_d;
+			value_d	= std::strtod(value.c_str(), &pointer);
+			if (pointer == value)
+			{
+				std::cout << "[ERROR] The 'double' type input is impossible to convert (Overflow)." << std::endl;
+				return ;
+			}
 			value_c	= static_cast<char>(value_d);
 			value_i	= static_cast<int>(value_d);
 			value_f	= static_cast<float>(value_d);
@@ -201,25 +216,21 @@ void	ScalarConverter::convert(std::string value)
 			break;
 	}
 
-	if (type != CHAR)
-	{
-		if (type == FLOAT)
-			overflow = convert.str() + "f";
-		else
-			overflow = convert.str();
-		if (overflow != value)
-		{
-			std::cout << "[ERROR] The input is impossible to convert (Overflow)." << std::endl;
-			return ;
-		}
-	}
-
 	if ((int)value_c >= 32 && (int)value_c <= 126)
 		std::cout << "char:   '" << value_c << "'" << std::endl;
 	else
 		std::cout << "char:   Not displayable" << std::endl;
 	
-	std::cout << "int:    " << value_i << std::endl;
+	if (type == FLOAT && (value_f > std::numeric_limits<int>::max() || value_f < std::numeric_limits<int>::min()))
+		std::cout << "int:    impossible" << std::endl;
+	else
+	{
+		if (type == DOUBLE && (value_d > std::numeric_limits<int>::max() || value_d < std::numeric_limits<int>::min()))
+			std::cout << "int:    impossible" << std::endl;
+		else
+			std::cout << "int:    " << std::fixed << std::setprecision(1) << value_f << "f" << std::endl;
+	}
+
 	std::cout << "float:  " << std::fixed << std::setprecision(1) << value_f << "f" << std::endl;
 	std::cout << "double: " << std::fixed << std::setprecision(1) << value_d << std::endl;
 }

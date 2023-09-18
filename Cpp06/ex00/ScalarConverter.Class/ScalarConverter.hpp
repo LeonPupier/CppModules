@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/18 18:13:27 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/18 18:38:59 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ class ScalarConverter {
 private:
 
 	// Body
-	static void		byDefault(std::string value);
-	static int		isChar(int type, std::string value);
-	static int		isInt(int type, std::string value);
-	static int		isFloat(int type, std::string value);
-	static int		isDouble(int type, std::string value);
+	static void			byDefault(std::string value);
+	static int			isChar(int type, std::string value);
+	static int			isInt(int type, std::string value);
+	static int			isFloat(int type, std::string value);
+	static int			isDouble(int type, std::string value);
 
 public:
 
