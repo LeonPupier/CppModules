@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.cpp                                         :+:      :+:    :+:   */
+/*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/18 08:48:25 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/18 18:19:26 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,10 @@ void	ScalarConverter::convert(std::string value)
 
 	if (type != CHAR)
 	{
-		overflow = convert.str();
+		if (type == FLOAT)
+			overflow = convert.str() + "f";
+		else
+			overflow = convert.str();
 		if (overflow != value)
 		{
 			std::cout << "[ERROR] The input is impossible to convert (Overflow)." << std::endl;
