@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/19 14:54:05 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 17:29:42 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ScalarConverter::byDefault(std::string value)
 		std::cout << "double: nan" << std::endl;
 	}
 	else
-		std::cout << "[ERROR] The input is impossible to convert." << std::endl;
+		std::cout << RED << "[ERROR] " << RESET << "The input is impossible to convert." << std::endl;
 }
 
 int	ScalarConverter::isChar(int type, std::string value)
@@ -137,39 +137,6 @@ int	ScalarConverter::isDouble(int type, std::string value)
 	return (DOUBLE);
 }
 
-std::string	ScalarConverter::trim_begin_zero(std::string value)
-{
-	std::string	new_value;
-	size_t	i;
-	bool	security = false;
-
-	for (i = 0; i < value.length(); i++)
-	{
-		if (value[i] == '0' && !security)
-			continue ;
-		else if (value[i] != '0')
-			security = true;
-		new_value += value[i];
-	}
-	return (new_value);
-}
-
-bool	ScalarConverter::isNegativeZero(std::string value)
-{
-	size_t	i;
-
-	for (i = 0; i < value.length(); i++)
-	{
-		if (!i && value[i] == '-')
-			continue ;
-		else if (value[i] == '0')
-			continue;
-		else
-			return (false);
-	}
-	return (true);
-}
-
 void	ScalarConverter::convert(std::string value)
 {
 	char		value_c;
@@ -177,10 +144,7 @@ void	ScalarConverter::convert(std::string value)
 	float		value_f;
 	double		value_d;
 	int			type = INVALID;
-	char		*pointer;
-
-	std::string			overflow;
-	std::ostringstream	convert;
+	long		long_nb;
 	
 	type = isChar(type, value);
 	if (type != CHAR)
@@ -208,24 +172,23 @@ void	ScalarConverter::convert(std::string value)
 			break;
 
 		case INT:
-			value_i	= atoi(value.c_str());
-			convert << value_i;
-			overflow = convert.str();
-			if (overflow != trim_begin_zero(value) && !isNegativeZero(value))
+			long_nb = std::strtol(value.c_str(), NULL, 10);
+			if (long_nb > std::numeric_limits<int>::max() || long_nb < std::numeric_limits<int>::min())
 			{
-				std::cout << "[ERROR] The 'integer' type is impossible to convert (Overflow or -0)." << std::endl;
+				std::cout << RED << "[ERROR] " << RESET << "The 'integer' type is impossible to convert (Overflow)." << std::endl;
 				return ;
 			}
+			value_i = static_cast<int>(long_nb);
 			value_c	= static_cast<char>(value_i);
 			value_d	= static_cast<double>(value_i);
 			value_f	= static_cast<float>(value_i);
 			break;
 
 		case FLOAT:
-			value_f	= std::strtof(value.c_str(), &pointer);
-			if (pointer == value)
+			value_f	= std::strtof(value.c_str(), NULL);
+			if (value_f == HUGE_VALF)
 			{
-				std::cout << "[ERROR] The 'float' type input is impossible to convert (Overflow)." << std::endl;
+				std::cout << RED << "[ERROR] " << RESET << "The 'float' type input is impossible to convert (Overflow)." << std::endl;
 				return ;
 			}
 			value_i	= static_cast<int>(value_f);
@@ -234,36 +197,47 @@ void	ScalarConverter::convert(std::string value)
 			break;
 
 		case DOUBLE:
-			value_d	= std::strtod(value.c_str(), &pointer);
-			if (pointer == value)
+			value_d	= std::strtod(value.c_str(), NULL);
+			if (value_d == HUGE_VAL)
 			{
-				std::cout << "[ERROR] The 'double' type input is impossible to convert (Overflow)." << std::endl;
+				std::cout << RED << "[ERROR] " << RESET << "The 'double' type input is impossible to convert (Overflow)." << std::endl;
 				return ;
 			}
 			value_c	= static_cast<char>(value_d);
 			value_i	= static_cast<int>(value_d);
 			value_f	= static_cast<float>(value_d);
 			break;
-
-		default:
-			return ;
 	}
 
-	if ((int)value_c >= 32 && (int)value_c <= 126)
+	// CHARACTER
+	if (value_i >= 32 && value_i <= 126)
 		std::cout << "char:   '" << value_c << "'" << std::endl;
 	else
 		std::cout << "char:   Not displayable" << std::endl;
-	
+
+
+	// INTEGER
 	if (type == FLOAT && (value_f > std::numeric_limits<int>::max() || value_f < std::numeric_limits<int>::min()))
-		std::cout << "int:    impossible" << std::endl;
+		std::cout << "int:    overflow" << std::endl;
+	else if (type == DOUBLE && (value_d > std::numeric_limits<int>::max() || value_d < std::numeric_limits<int>::min()))
+		std::cout << "int:    overflow" << std::endl;
+	else
+		std::cout << "int:    " << value_i << std::endl;
+
+	// FLOAT
+	if (type == DOUBLE && (value_d > std::numeric_limits<float>::max() || value_d < -std::numeric_limits<float>::max()))
+		std::cout << "float:  overflow" << std::endl;
 	else
 	{
-		if (type == DOUBLE && (value_d > std::numeric_limits<int>::max() || value_d < std::numeric_limits<int>::min()))
-			std::cout << "int:    impossible" << std::endl;
-		else
-			std::cout << "int:    " << value_i << std::endl;
+		std::cout << "float:  " << value_f;
+		if (value_f - value_i == 0)
+			std::cout << ".0";
+		std::cout << "f" << std::endl;
 	}
 
-	std::cout << "float:  " << std::fixed << std::setprecision(8) << value_f << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(8) << value_d << std::endl;
+	// DOUBLE
+	std::cout << "double: " << value_d;
+	if (value_d - value_i == 0)
+		std::cout << ".0";
+	std::cout << std::endl;
 }
