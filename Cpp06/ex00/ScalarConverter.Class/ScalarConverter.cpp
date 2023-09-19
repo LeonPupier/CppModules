@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/19 08:54:47 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:49:04 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,23 @@ int	ScalarConverter::isDouble(int type, std::string value)
 	return (DOUBLE);
 }
 
+std::string	ScalarConverter::trim_begin_zero(std::string value)
+{
+	std::string	new_value;
+	size_t	i;
+	bool	security = false;
+
+	for (i = 0; i < value.length(); i++)
+	{
+		if (value[i] == '0' && !security)
+			continue ;
+		else if (value[i] != '0')
+			security = true;
+		new_value += value[i];
+	}
+	return (new_value);
+}
+
 bool	ScalarConverter::isNegativeZero(std::string value)
 {
 	size_t	i;
@@ -194,7 +211,7 @@ void	ScalarConverter::convert(std::string value)
 			value_i	= atoi(value.c_str());
 			convert << value_i;
 			overflow = convert.str();
-			if (overflow != value && !isNegativeZero(value))
+			if (overflow != trim_begin_zero(value) && !isNegativeZero(value))
 			{
 				std::cout << "[ERROR] The 'integer' type is impossible to convert (Overflow or -0)." << std::endl;
 				return ;

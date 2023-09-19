@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/19 09:12:31 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:49:26 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ private:
 	static int			isInt(int type, std::string value);
 	static int			isFloat(int type, std::string value);
 	static int			isDouble(int type, std::string value);
+	static std::string	trim_begin_zero(std::string value);
 	static bool			isNegativeZero(std::string value);
 
 public:
