@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/19 14:49:04 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:54:05 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,9 +261,9 @@ void	ScalarConverter::convert(std::string value)
 		if (type == DOUBLE && (value_d > std::numeric_limits<int>::max() || value_d < std::numeric_limits<int>::min()))
 			std::cout << "int:    impossible" << std::endl;
 		else
-			std::cout << "int:    " << std::fixed << std::setprecision(1) << value_i << std::endl;
+			std::cout << "int:    " << value_i << std::endl;
 	}
 
-	std::cout << "float:  " << std::fixed << std::setprecision(1) << value_f << "f" << std::endl;
-	std::cout << "double: " << std::fixed << std::setprecision(1) << value_d << std::endl;
+	std::cout << "float:  " << std::fixed << std::setprecision(8) << value_f << "f" << std::endl;
+	std::cout << "double: " << std::fixed << std::setprecision(8) << value_d << std::endl;
 }
