@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/18 19:06:54 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 08:54:47 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,22 @@ int	ScalarConverter::isDouble(int type, std::string value)
 	return (DOUBLE);
 }
 
+bool	ScalarConverter::isNegativeZero(std::string value)
+{
+	size_t	i;
+
+	for (i = 0; i < value.length(); i++)
+	{
+		if (!i && value[i] == '-')
+			continue ;
+		else if (value[i] == '0')
+			continue;
+		else
+			return (false);
+	}
+	return (true);
+}
+
 void	ScalarConverter::convert(std::string value)
 {
 	char		value_c;
@@ -178,7 +194,7 @@ void	ScalarConverter::convert(std::string value)
 			value_i	= atoi(value.c_str());
 			convert << value_i;
 			overflow = convert.str();
-			if (overflow != value)
+			if (overflow != value && !isNegativeZero(value))
 			{
 				std::cout << "[ERROR] The 'integer' type is impossible to convert (Overflow or -0)." << std::endl;
 				return ;
@@ -213,7 +229,7 @@ void	ScalarConverter::convert(std::string value)
 			break;
 
 		default:
-			break;
+			return ;
 	}
 
 	if ((int)value_c >= 32 && (int)value_c <= 126)
@@ -228,7 +244,7 @@ void	ScalarConverter::convert(std::string value)
 		if (type == DOUBLE && (value_d > std::numeric_limits<int>::max() || value_d < std::numeric_limits<int>::min()))
 			std::cout << "int:    impossible" << std::endl;
 		else
-			std::cout << "int:    " << std::fixed << std::setprecision(1) << value_f << "f" << std::endl;
+			std::cout << "int:    " << std::fixed << std::setprecision(1) << value_i << std::endl;
 	}
 
 	std::cout << "float:  " << std::fixed << std::setprecision(1) << value_f << "f" << std::endl;

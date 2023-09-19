@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Serialization.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/19 09:12:31 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:26:14 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SERIALIZATION_HPP
+# define SERIALIZATION_HPP
 
 # include <iostream>
-# include <iomanip>
-# include <cstdlib>
-# include <limits>
-# include <sstream>
+# include <stdint.h>
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[30m"
@@ -37,29 +34,27 @@ enum {
 	DOUBLE
 };
 
-class ScalarConverter {
+struct Data {
+	int				i;
+	double			d;
+	float			f;
+	std::string		str;
+};
 
-private:
-
-	// Body
-	static void			byDefault(std::string value);
-	static int			isChar(int type, std::string value);
-	static int			isInt(int type, std::string value);
-	static int			isFloat(int type, std::string value);
-	static int			isDouble(int type, std::string value);
-	static bool			isNegativeZero(std::string value);
+class Serialization {
 
 public:
 
 	// Init
-	ScalarConverter();
-	ScalarConverter(std::string type, int grade);
-	ScalarConverter(const ScalarConverter &obj);
-	~ScalarConverter(void);
-	ScalarConverter &operator=(const ScalarConverter &obj);
+	Serialization();
+	Serialization(std::string type, int grade);
+	Serialization(const Serialization &obj);
+	~Serialization(void);
+	Serialization &operator=(const Serialization &obj);
 
 	// Body
-	static void		convert(std::string value);
+	static uintptr_t	serialize(Data* ptr);
+	static Data*		deserialize(uintptr_t raw);
 };
 
 #endif
