@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/26 14:37:21 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/26 15:44:13 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 bool	processRPN(std::string operation)
 {
 	std::stack<int>	stack;
-	int				a;
-	int				b;
+	double				a;
+	double				b;
+	double			result;
 
 	for (size_t i = 0; i < operation.length(); i++)
 	{
@@ -36,13 +37,28 @@ bool	processRPN(std::string operation)
 			stack.pop();
 			
 			if (operation[i] == '+')
-				stack.push(b + a);
+				result = b + a;
 			else if (operation[i] == '-')
-				stack.push(b - a);
+				result = b - a;
 			else if (operation[i] == '/')
-				stack.push(b / a);
+			{
+				if (!a)
+				{
+					std::cout << RED << "[Error] " << RESET << "Division by 0." << std::endl;
+					return (false);
+				}
+				result = b / a;
+			}
 			else if (operation[i] == '*')
-				stack.push(b * a);
+				result = b * a;
+			
+			if (result > INT_MAX || result < INT_MIN)
+			{
+				std::cout << RED << "[Error] " << RESET << "Overflow." << std::endl;
+				return (false);
+			}
+			stack.push(result);
+
 		}
 		else if (operation[i] >= '0' && operation[i] <= '9')
 			stack.push(operation[i] - 48);
