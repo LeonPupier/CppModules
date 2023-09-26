@@ -6,11 +6,11 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 13:46:15 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/26 14:36:16 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:39:06 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.Class/RPN.hpp"
+#include "RPN.hpp"
 
 int	main(int argc, char **argv)
 {

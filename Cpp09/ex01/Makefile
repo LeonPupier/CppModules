@@ -6,7 +6,7 @@
 #    By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/03 09:49:02 by lpupier           #+#    #+#              #
-#    Updated: 2023/09/26 13:49:08 by lpupier          ###   ########.fr        #
+#    Updated: 2023/09/26 14:39:13 by lpupier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ DIR_SRCS		=	./
 DIR_HEADERS		=	./
 
 # Sources files
-SRCS			=	${DIR_SRCS}main.cpp				\
-					${DIR_SRCS}RPN.Class/RPN.cpp
+SRCS			=	${DIR_SRCS}main.cpp		\
+					${DIR_SRCS}RPN.cpp
 
-HEADERS			=	${DIR_HEADERS}RPN.Class/RPN.hpp
+HEADERS			=	${DIR_HEADERS}RPN.hpp
 
 # Objects
 DIR_OBJS		=	.objs/
