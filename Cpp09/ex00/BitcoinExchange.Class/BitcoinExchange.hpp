@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/25 18:16:19 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/26 12:07:51 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
 
+# define ERR_VALUE	-1
+
 class BitcoinExchange {
 
 private:
 
-	std::map<std::string, double>	_database;
+	std::map<std::string, float>	_database;
 
 	bool	isNumber(std::string str);
 	bool	dateIsValid(std::string date);
-	float	valueConverter(std::string value);
+	float	valueConverter(std::string key, std::string value);
+	float	findValueInDB(std::string date);
 
 public:
 

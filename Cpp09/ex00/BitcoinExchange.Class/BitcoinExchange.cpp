@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/25 18:20:32 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/09/26 12:10:36 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ BitcoinExchange::BitcoinExchange()
 	std::ifstream	file;
 	std::string		line;
 	std::string		key;
-	double			value;
+	float			value;
 
 	std::cout << GREEN << "[LOG] " << RESET << "BitcoinExchange class has been created" << std::endl;
 
@@ -32,7 +32,7 @@ BitcoinExchange::BitcoinExchange()
 	{
 		std::getline(file, line);
 		key = line.substr(0, line.find(","));
-		value = std::strtod(line.substr(line.find(",") + 1).c_str(), NULL);
+		value = std::strtof(line.substr(line.find(",") + 1).c_str(), NULL);
 		this->_database[key] = value;
 	}
 	file.close();
@@ -91,27 +91,63 @@ bool	BitcoinExchange::dateIsValid(std::string date)
 	return (true);
 }
 
-float	BitcoinExchange::valueConverter(std::string value)
+float	BitcoinExchange::valueConverter(std::string key, std::string value)
 {
-	size_t	i;
-	float	number;
+	size_t	i = 0;
 	bool	is_point = false;
+	float	number;
 
-	for (i = 0; i < value.length(); i++)
+	while (value[i] && i < value.length())
 	{
+		if (i == 0 && value[0] == '-')
+			i++;
 		if (value[i] == '.')
 		{
 			if (is_point)
-				return (0);
+			{
+				std::cout << RED << "Error: " << RESET << "bad input => " << key << std::endl;
+				return (ERR_VALUE);
+			}
 			is_point = true;
 		}
 		else if (value[i] < '0' || value[i] > '9')
-			return (0);
+		{
+			std::cout << RED << "Error: " << RESET << "bad input => " << key << std::endl;
+			return (ERR_VALUE);
+		}
+		i++;
 	}
 	
 	number = std::strtof(value.c_str(), NULL);
-	if (number < 1 || number > 1000)
-		return (0);
+	if (number < 0)
+	{
+		std::cout << RED << "Error: " << RESET << "not a positive number." << std::endl;
+		return (ERR_VALUE);
+	}
+	else if (number > 1000)
+	{
+		std::cout << RED << "Error: " << RESET << "too large a number." << std::endl;
+		return (ERR_VALUE);
+	}
+	
+	return (number);
+}
+
+float	BitcoinExchange::findValueInDB(std::string date)
+{
+	float	number;
+
+	if (this->_database.find(date) != this->_database.end())
+		number = this->_database[date];
+	else
+	{
+		std::map<std::string, float>::iterator it = this->_database.lower_bound(date);
+		if (it == this->_database.begin())
+			return (0);
+		it--;
+		number = it->second;
+	}
+
 	return (number);
 }
 
@@ -122,6 +158,7 @@ bool	BitcoinExchange::readFile(std::string path)
 	std::string		key;
 	std::string		value;
 	size_t			pos_delimiter;
+	float			value_converted;
 
 	file.open(path.c_str(), std::ifstream::in);
 	if (!file.is_open())
@@ -157,13 +194,12 @@ bool	BitcoinExchange::readFile(std::string path)
 		
 		if (this->dateIsValid(key))
 		{
-			std::cout << "[" << key << "] ";
-			if (this->valueConverter(value))
-				std::cout << "(" << value << ")";
-			else
-				std::cout << "(" << value << ") Invalid";
-			std::cout << std::endl;
+			value_converted = this->valueConverter(key, value);
+			if (value_converted != ERR_VALUE)
+				std::cout << key << " => " << value_converted << " = " << (this->findValueInDB(key) * value_converted) << std::endl;
 		}
+		else
+			std::cout << RED << "Error: " << RESET << "not a valid date." << std::endl;
 	}
 	file.close();
 	return (true);
