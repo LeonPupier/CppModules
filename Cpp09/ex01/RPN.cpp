@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/26 15:44:13 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/11/02 13:21:46 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 bool	processRPN(std::string operation)
 {
-	std::stack<int>	stack;
+	std::stack<double>	stack;
 	double				a;
 	double				b;
-	double			result;
+	double				result;
+
+	if (operation.empty())
+	{
+		std::cout << RED << "[Error] " << RESET << "Empty operation." << std::endl;
+		return (false);
+	}
 
 	for (size_t i = 0; i < operation.length(); i++)
 	{
