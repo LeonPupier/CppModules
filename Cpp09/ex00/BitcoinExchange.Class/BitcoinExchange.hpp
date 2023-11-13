@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:16 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/26 12:07:51 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/11/03 11:17:10 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@ public:
 	BitcoinExchange(const BitcoinExchange &obj);
 	~BitcoinExchange(void);
 	BitcoinExchange &operator=(const BitcoinExchange &obj);
+
+	// Getter
+	std::map<std::string, float>	getDatabase() const;
+
+	// Setter
+	void	setDatabase(std::map<std::string, float> database);
 
 	// Body
 	bool	readFile(std::string path);

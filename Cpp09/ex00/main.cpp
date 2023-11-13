@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 09:35:23 by lpupier           #+#    #+#             */
-/*   Updated: 2023/09/21 13:33:44 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/11/03 11:06:07 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 int	main(int argc, char **argv)
 {
 	// Check the argument(s)
-	if (argc != 2)
+	if (argc < 2)
 	{
-		std::cout << RED << "Error: " << RESET << "could not open file." << std::endl;
+		std::cout << RED << "Error: " << RESET << "need a file in argument." << std::endl;
+		return (1);
+	}
+	else if (argc > 2)
+	{
+		std::cout << RED << "Error: " << RESET << "too many arguments." << std::endl;
 		return (1);
 	}
 
