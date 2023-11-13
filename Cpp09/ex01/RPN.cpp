@@ -6,7 +6,7 @@
 /*   By: lpupier <lpupier@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 08:27:14 by lpupier           #+#    #+#             */
-/*   Updated: 2023/11/02 13:21:46 by lpupier          ###   ########.fr       */
+/*   Updated: 2023/11/03 13:07:29 by lpupier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	processRPN(std::string operation)
 		{
 			if (stack.size() < 2)
 			{
-				std::cout << RED << "[Error] " << RESET << "Not enough numbers to perform the operation." << std::endl;
+				std::cout << RED << "[Error] " << RESET << "Not enough numbers." << std::endl;
 				return (false);
 			}
 
@@ -73,6 +73,12 @@ bool	processRPN(std::string operation)
 			std::cout << RED << "[Error] " << RESET << "Invalid character: '" << operation[i] << "'." << std::endl;
 			return (false);
 		}
+	}
+
+	if (stack.size() != 1)
+	{
+		std::cout << RED << "[Error] " << RESET << "Not enough operators." << std::endl;
+		return (false);
 	}
 
 	std::cout << GREEN << "[Result] " << RESET << stack.top() << std::endl;
